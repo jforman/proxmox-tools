@@ -19,7 +19,9 @@ wget -O $LOCAL_IMG_PATH http://cloud-images.ubuntu.com/releases/$RELEASE_YYDD/re
 
 virt-customize -v -x -a $LOCAL_IMG_PATH --install qemu-guest-agent
 
-qm importdisk $NEXTID $LOCAL_IMG_PATH $VM_STORAGE
+qm create $VM_ID
+
+qm disk import $VM_ID $LOCAL_IMG_PATH $VM_STORAGE
 
 qm set $VM_ID --scsihw virtio-scsi-pci --scsi0 $VM_STORAGE:vm-$VM_ID-disk-0
 
